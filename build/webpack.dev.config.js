@@ -8,8 +8,8 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   mode: 'development',
   devServer: {
     hot: true,
-    contentBase: path.join(__dirname, 'public'),
-    publicPath: '/',
+    contentBase: path.join(__dirname, '../dist/'),
+    // publicPath: '/',
     host: 'localhost',
     port: 5050,
   },

@@ -14,16 +14,17 @@ module.exports = {
     index: './src/main.ts',
   },
   output: {
-    path: path.join(__dirname, '../dist'),
+    path: path.join(__dirname, '../dist/'),
     filename: '[name].js',
-    publicPath: '/',
+    // publicPath: '/',
   },
   module: {
     rules: [
       {
-        test: /\.vue$/,
-        loader: 'vue-loader',
+        test: /.js$/,
+        use: 'babel-loader',
         exclude: /node_modules/,
+        // include: [resolve('src')],
       },
       {
         test: /\.tsx?$/,
@@ -34,9 +35,9 @@ module.exports = {
         },
       },
       {
-        test: /.js$/,
-        use: 'babel-loader',
-        // include: [resolve('src')],
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        exclude: /node_modules/,
       },
       {
         test: /.css$/,
@@ -76,6 +77,7 @@ module.exports = {
       filename: 'index.html',
       chunks: ['index'],
       inject: true,
+      title: 'Vue UI Components with Typescript',
       // minify: {
       //   html5: true,
       //   collapseWhitespace: true,
