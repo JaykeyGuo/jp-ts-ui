@@ -1,6 +1,8 @@
 const path = require('path');
 // const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+// const CopyWebpackPlugin = require('copy-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 function resolve(dir) {
@@ -16,7 +18,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, '../dist/'),
     filename: '[name].js',
-    // publicPath: '/',
+    publicPath: './',
   },
   module: {
     rules: [
@@ -72,21 +74,42 @@ module.exports = {
     },
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, '../index.html'),
       filename: 'index.html',
       chunks: ['index'],
       inject: true,
       title: 'Vue UI Components with Typescript',
-      // minify: {
+      minify: {
       //   html5: true,
       //   collapseWhitespace: true,
       //   preserveLineBreaks: false,
-      //   minifyCSS: true,
-      //   minifyJS: true,
+        minifyCSS: true,
+        minifyJS: true,
       //   removeComments: false,
-      // },
+      },
     }),
     new VueLoaderPlugin(),
+    // new CopyWebpackPlugin([
+    //   {
+    //     from: path.resolve(__dirname, '../public'),
+    //     to: 'public',
+    //     ignore: ['.*'],
+    //   },
+    // ]),
   ],
+  // optimization: {
+  //   splitChunks: {
+  //     chunks: 'all', // 所有的 chunks 代码公共的部分分离出来成为一个单独的文件
+  // cacheGroups: {
+  //   vendor: {
+  //     chunks: 'initial',
+  //     test: 'vendor',
+  //     name: 'vendor', // 使用 vendor 入口作为公共部分
+  //     enforce: true,
+  //   },
+  // },
+  //   },
+  // },
 };

@@ -2,8 +2,6 @@
 const merge = require('webpack-merge');
 const baseWebpackConfig = require('./webpack.config');
 
-const clear;
-
 const proWebpackConfig = merge(baseWebpackConfig, {
   mode: 'production',
 });
